@@ -1,5 +1,5 @@
 aprs:
-  callsign: 'UR5WKM-20'
+  callsign: 'UR5WKM-10'
   host: "rotate.aprs.net"
   port: 14580
   filter: "d/RS0ISS"

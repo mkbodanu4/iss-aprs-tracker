@@ -1,11 +1,11 @@
 [Unit]
-Description=High Altitude Balloon APRS Tracker
+Description=ISS APRS Tracker
 After=multi-user.target
 
 [Service]
-WorkingDirectory=/home/user/high-altitude-balloon-aprs-tracker
+WorkingDirectory=/home/user/iss-aprs-tracker
 Type=idle
-ExecStart=/usr/bin/python3 /home/user/high-altitude-balloon-aprs-tracker/tracker.py
+ExecStart=/usr/bin/python3 /home/user/iss-aprs-tracker/tracker.py
 Restart=always
 
 [Install]

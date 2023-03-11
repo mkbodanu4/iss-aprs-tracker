@@ -66,7 +66,7 @@ def flush_history(keep=500):
         finally:
             crs.close()
 
-        logging.info("History flushed")
+        logging.debug("History flushed")
         last_flush = time.time()
 
 
