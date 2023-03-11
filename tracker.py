@@ -85,14 +85,6 @@ def callback(packet):
         logging.info(parsed.get('from') + " ignored: q construct prohibited (" + q + "," + parsed.get('via') + "; " + parsed.get("comment") + ")")
         return
 
-    if parsed.get('latitude') is None or parsed.get('longitude') is None:
-        logging.info(parsed.get('from') + " ignored: empty coordinates")
-        return
-
-    if 0.1 > parsed.get('latitude') > -0.1 and 0.1 > parsed.get('longitude') > -0.1:
-        logging.warning(parsed.get('from') + " ignored: GPS positioning error (" + str(parsed.get('latitude')) + "," + str(parsed.get('longitude')) + "; via " + parsed.get('via') + ")")
-        return
-
     insert_query = """INSERT INTO
         `history`
     SET
@@ -113,15 +105,21 @@ def callback(packet):
     ;"""
     insert_params = (
         parsed.get('from'),
-        parsed.get('comment'),
-        parsed.get('latitude'),
-        parsed.get('longitude'),
+        parsed.get('comment', default=None),
+        parsed.get('to', default=None),
+        parsed.get('addresse', default=None),
+        parsed.get('message_text', default=None),
+        parsed.get('latitude', default=None),
+        parsed.get('longitude', default=None),
         parsed.get('raw'),
 
         parsed.get('from'),
-        parsed.get('comment'),
-        parsed.get('latitude'),
-        parsed.get('longitude'),
+        parsed.get('comment', default=None),
+        parsed.get('to', default=None),
+        parsed.get('addresse', default=None),
+        parsed.get('message_text', default=None),
+        parsed.get('latitude', default=None),
+        parsed.get('longitude', default=None),
         parsed.get('raw')
     )
 
