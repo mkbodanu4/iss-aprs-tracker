@@ -80,11 +80,6 @@ def callback(packet):
         logging.warning(str(packet) + " ignored: can't be parsed (" + str(exception) + ")")
         return
 
-    q = parsed.get('path')[-2]
-    if q not in ['qAR', 'qAO', 'qAo']:
-        logging.info(parsed.get('from') + " ignored: q construct prohibited (" + q + "," + parsed.get('via') + "; " + parsed.get("comment") + ")")
-        return
-
     insert_query = """INSERT INTO
         `history`
     SET
