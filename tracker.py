@@ -50,15 +50,15 @@ def flush_history(keep=500):
             FROM `history` `h3`
             WHERE `h3`.`date` < (
             SELECT `t`.`date`
-            FROM (SELECT `h1`.`call_sign`,
+            FROM (SELECT `h1`.`from`,
                          (SELECT `h2`.`date`
                           FROM `history` `h2`
-                          WHERE `h2`.`call_sign` = `h1`.`call_sign`
+                          WHERE `h2`.`from` = `h1`.`from`
                           ORDER BY `h2`.`date` DESC
                           LIMIT %s, 1) AS `date`
                   FROM `history` `h1`
-                  GROUP BY `h1`.`call_sign`) `t`
-            WHERE `h3`.`call_sign` = `t`.`call_sign` AND `t`.`date` IS NOT NULL
+                  GROUP BY `h1`.`from`) `t`
+            WHERE `h3`.`from` = `t`.`from` AND `t`.`date` IS NOT NULL
             );
             """, (keep - 1,))
         except Exception as exception:
@@ -77,7 +77,7 @@ def callback(packet):
     try:
         parsed = aprslib.parse(packet)
     except (aprslib.ParseError, aprslib.UnknownFormat) as exception:
-        logging.warning(packet + " ignored: can't be parsed (" + exception + ")")
+        logging.warning(str(packet) + " ignored: can't be parsed (" + str(exception) + ")")
         return
 
     q = parsed.get('path')[-2]
@@ -88,38 +88,44 @@ def callback(packet):
     insert_query = """INSERT INTO
         `history`
     SET
-        `call_sign` = %s,
+        `from` = %s,
         `date` = UTC_TIMESTAMP(),
         `comment` = %s,
+        `to` = %s,
+        `addresse` = %s,
+        `message_text` = %s,
         `latitude` = %s,
         `longitude` = %s,
         `raw` = %s
     ON DUPLICATE KEY
         UPDATE
-            `call_sign` = %s,
+            `from` = %s,
             `date` = UTC_TIMESTAMP(),
             `comment` = %s,
+            `to` = %s,
+            `addresse` = %s,
+            `message_text` = %s,
             `latitude` = %s,
             `longitude` = %s,
             `raw` = %s
     ;"""
     insert_params = (
         parsed.get('from'),
-        parsed.get('comment', default=None),
-        parsed.get('to', default=None),
-        parsed.get('addresse', default=None),
-        parsed.get('message_text', default=None),
-        parsed.get('latitude', default=None),
-        parsed.get('longitude', default=None),
+        parsed.get('comment'),
+        parsed.get('to'),
+        parsed.get('addresse'),
+        parsed.get('message_text'),
+        parsed.get('latitude'),
+        parsed.get('longitude'),
         parsed.get('raw'),
 
         parsed.get('from'),
-        parsed.get('comment', default=None),
-        parsed.get('to', default=None),
-        parsed.get('addresse', default=None),
-        parsed.get('message_text', default=None),
-        parsed.get('latitude', default=None),
-        parsed.get('longitude', default=None),
+        parsed.get('comment'),
+        parsed.get('to'),
+        parsed.get('addresse'),
+        parsed.get('message_text'),
+        parsed.get('latitude'),
+        parsed.get('longitude'),
         parsed.get('raw')
     )
 
