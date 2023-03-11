@@ -1,0 +1,20 @@
+aprs:
+  callsign: 'UR5WKM-20'
+  host: "rotate.aprs.net"
+  port: 14580
+  filter: "d/RS0ISS"
+
+history:
+  # Allowed any number or string 'all' to keep all results in db
+  keep: 1000
+
+logging:
+  # Allowed levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: 'WARNING'
+
+mysql:
+  hostname: 'localhost'
+  unix_socket: '/run/mysqld/mysqld.sock'
+  username: 'root'
+  password: 'a'
+  database: 'iss_tracker'
