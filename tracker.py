@@ -91,6 +91,8 @@ def callback(packet):
         `message_text` = %s,
         `latitude` = %s,
         `longitude` = %s,
+        `symbol_table` = %s,
+        `symbol` = %s,
         `raw` = %s
     ON DUPLICATE KEY
         UPDATE
@@ -102,6 +104,8 @@ def callback(packet):
             `message_text` = %s,
             `latitude` = %s,
             `longitude` = %s,
+            `symbol_table` = %s,
+            `symbol` = %s,
             `raw` = %s
     ;"""
     insert_params = (
@@ -112,6 +116,8 @@ def callback(packet):
         parsed.get('message_text'),
         parsed.get('latitude'),
         parsed.get('longitude'),
+        parsed.get('symbol_table'),
+        parsed.get('symbol'),
         parsed.get('raw'),
 
         parsed.get('from'),
@@ -121,6 +127,8 @@ def callback(packet):
         parsed.get('message_text'),
         parsed.get('latitude'),
         parsed.get('longitude'),
+        parsed.get('symbol_table'),
+        parsed.get('symbol'),
         parsed.get('raw')
     )
 

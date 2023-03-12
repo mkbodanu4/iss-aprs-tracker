@@ -8,6 +8,8 @@ CREATE TABLE `history`
     `message_text` TEXT           NULL DEFAULT NULL,
     `latitude`     DECIMAL(10, 8) NULL DEFAULT NULL,
     `longitude`    DECIMAL(11, 8) NULL DEFAULT NULL,
+    `symbol_table` VARCHAR(5)     NULL DEFAULT NULL,
+    `symbol`       VARCHAR(5)     NULL DEFAULT NULL,
     `raw`          TEXT           NULL DEFAULT NULL,
     CONSTRAINT `from_date` PRIMARY KEY (`date`, `from`),
     INDEX `from` (`from`)
