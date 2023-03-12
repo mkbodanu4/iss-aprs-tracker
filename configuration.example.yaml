@@ -2,7 +2,7 @@ aprs:
   callsign: 'UR5WKM-10'
   host: "rotate.aprs.net"
   port: 14580
-  filter: "d/RS0ISS"
+  filter: "d/RS0ISS/NA1SS/DP0ISS/OR4ISS/IR0ISS b/RS0ISS/NA1SS/DP0ISS/OR4ISS/IR0ISS"
 
 history:
   # Allowed any number or string 'all' to keep all results in db
