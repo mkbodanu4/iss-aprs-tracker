@@ -6,7 +6,7 @@ aprs:
 
 history:
   # Allowed any number or string 'all' to keep all results in db
-  keep: 200
+  keep: 1000
 
 logging:
   # Allowed levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
