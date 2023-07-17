@@ -3,6 +3,7 @@ Description=ISS APRS Tracker
 After=multi-user.target
 
 [Service]
+EnvironmentFile=/home/user/iss-aprs-tracker/.env
 WorkingDirectory=/home/user/iss-aprs-tracker
 Type=idle
 ExecStart=/usr/bin/python3 /home/user/iss-aprs-tracker/tracker.py
