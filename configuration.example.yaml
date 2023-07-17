@@ -1,5 +1,5 @@
 aprs:
-  callsign: 'UR5WKM-10'
+  callsign: !ENV ${CALLSIGN:N0SIGN}
   host: "rotate.aprs.net"
   port: 14580
   filter: "d/RS0ISS/NA1SS/DP0ISS/OR4ISS/IR0ISS b/RS0ISS/NA1SS/DP0ISS/OR4ISS/IR0ISS"
@@ -10,11 +10,12 @@ history:
 
 logging:
   # Allowed levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
-  level: 'WARNING'
+  level: !ENV ${LOG_LEVEL:WARNING}
 
 mysql:
-  hostname: 'localhost'
-  unix_socket: '/run/mysqld/mysqld.sock'
-  username: 'root'
-  password: 'a'
-  database: 'iss_tracker'
+  hostname: !ENV ${DB_HOST:iss_aprs_tracker_db}
+  port: !!int !ENV ${DB_PORT:3306}
+  unix_socket: !ENV ${DB_SOCKET:/run/mysqld/mysqld.sock}
+  username: !ENV ${DB_USERNAME:user}
+  password: !ENV ${DB_PASSWORD:changeme}
+  database: !ENV ${DB_DATABASE:iss_tracker}

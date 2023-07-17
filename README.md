@@ -4,19 +4,27 @@ Python-based APRS-IS data collector of International Space Station APRS Tracker.
 ## Requirements
 
 * aprslib=0.7.2
-* pyaml=6.0
+* PyYAML=6.0
+* pyaml-env=1.2.1
 * mysqlclient=2.1.1
 
 ## Installation
 
-1. Upload code to your VPS or server
-2. Rename *configuration.example.yaml* to *configuration.yaml*
-3. Update *configuration.yaml* file with your own configuration
-4. Update *issd.service* file with the proper path to the installation folder.
-5. Copy *issd.service* file to systemd folder (*/etc/systemd/system/*)
-6. Enable and start a service named *issd*.
+1. Install all requirements `pip3 install -r requirements.txt`
+2. Upload code to your VPS or server
+3. Rename `configuration.example.yaml` to `configuration.yaml` (`cp configuration.example.yaml configuration.yaml`)
+4. Update `configuration.yaml` file with your own configuration or keep it as it is and edit only `.env` file
+5. Update `issd.service` file with the proper path to the installation folder.
+6. Copy `issd.service` file to systemd folder (e.g. `/etc/systemd/system/`)
+7. Enable and start a service named `issd`.
+
+## Running via Docker
+1. Set up `.env` file with your own configuration (change passwords!)
+2. Run `docker-compose up -d`
 
 ## Configuration
+
+(check `configuration.example.yaml` for more details)
 
 * aprs
   * call_sign - unique call sign and SSID, used to identify you at APRS-IS server

@@ -1,11 +1,13 @@
 import MySQLdb
 import aprslib
 import yaml
+from pyaml_env import parse_config
 import logging
 import time
+import sys
 
-with open("configuration.yaml", 'r') as stream:
-    configuration = yaml.safe_load(stream)
+configuration = parse_config(path='configuration.yaml', loader=yaml.SafeLoader)
+configuration['mysql']['unix_socket'] = configuration['mysql']['unix_socket'] if configuration['mysql']['unix_socket'] != 'false' else None
 
 formatter = logging.Formatter(fmt='<%(asctime)s> [%(levelname)s]: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
